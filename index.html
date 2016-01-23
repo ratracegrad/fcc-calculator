@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Free Code Camp - Calculator</title>
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+
+    <body>
+        <div class="container">
+
+            <div class="frame">
+                <div class="content">
+                    <div class="ans text-right">0</div>
+                    <div class="calculator">
+                        <button class="btn btn-danger" id="btn-ac">AC</button>
+                        <button class="btn btn-danger" id="btn-ce">CE</button>
+                        <button class="btn btn-default" id="btn-percent">%</button>
+                        <button class="btn btn-default" id="btn-divide">/</button>
+                        <br/>
+                        <button class="btn btn-default" id="btn-seven">7</button>
+                        <button class="btn btn-default" id="btn-eight">8</button>
+                        <button class="btn btn-default" id="btn-nine">9</button>
+                        <button class="btn btn-default" id="btn-multiply">X</button>
+                        <br/>
+                        <button class="btn btn-default" id=" btn-four">4</button>
+                        <button class="btn btn-default" id="btn-five">5</button>
+                        <button class="btn btn-default" id="btn-six">6</button>
+                        <button class="btn btn-default" id="btn-subtract">-</button>
+                        <br/>
+                        <button class="btn btn-default" id="btn-one">1</button>
+                        <button class="btn btn-default" id="btn-two">2</button>
+                        <button class="btn btn-default" id="btn-three">3</button>
+                        <button class="btn btn-default" id="btn-add">+</button>
+
+                        <button class="btn btn-default" id="btn-zero">0</button>
+                        <button class="btn btn-default" id="btn-decimal">.</button>
+                        <button class="btn btn-default" id="btn-equal">=</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js"></script>
+        <script>
+            $(document).ready(main);
+
+
+            function main() {
+                var num1 = null;
+                var num2 = null;
+                var operator = null;
+                var tot = 0;
+
+                $('.calculator').click(function(event) {
+                    var button = $(event.target).closest('button')[0].id;
+                    switch(button) {
+                        case 'btn-ac':
+                            clearCalc();
+                            break;
+                        case 'btn-ce':
+                            clearCalc();
+                            break;
+                        case 'btn-percent':
+                            break;
+                        case 'btn-divide':
+                            operator = 'divide';
+                            break;
+                        case 'btn-seven':
+                            clickNum(7);
+                            break;
+                        case 'btn-eight':
+                            clickNum(8);
+                            break;
+                        case 'btn-nine':
+                            clickNum(9);
+                            break;
+                        case 'btn-multiply':
+                            operator = 'multiply';
+                            break;
+                        case 'btn-four':
+                            clickNum(4);
+                            break;
+                        case 'btn-five':
+                            clickNum(5);
+                            break;
+                        case 'btn-six':
+                            clickNum(6);
+                            break;
+                        case 'btn-subtract':
+                            operator = 'subtract';
+                            break;
+                        case 'btn-one':
+                            clickNum(1);
+                            break;
+                        case 'btn-two':
+                            clickNum(2);
+                            break;
+                        case 'btn-three':
+                            clickNum(3);
+                            break;
+                        case 'btn-add':
+                            operator = 'add';
+                            break;
+                        case 'btn-zero':
+                            clickNum(0);
+                            break;
+                        case 'btn-decimal':
+                            break;
+                        case 'btn-equal':
+                            clickEqual();
+                            break;
+                        default:
+                    }
+                });
+
+                function clearCalc() {
+                    $('.ans').text(0);
+                    num1 = null;
+                    num2 = null;
+                    tot = 0;
+                    operator = null;
+                }
+
+                function clickNum(val) {
+                    $('.ans').text(val);
+
+                    if (operator) {
+                        num2 = val;
+                        if (operator === 'add') {
+                            tot = num1 + num2;
+                        } else if (operator === 'subtract') {
+                            tot = num1 - num2;
+                        } else if (operator === 'multiply') {
+                            tot = num1 * num2;
+                        } else if (operator === 'divide') {
+                            tot = num1 / num2;
+                        }
+                        num1 = tot;
+                        num2 = null;
+                        operator = null;
+                    } else {
+                        num1 = val;
+                    }
+                }
+
+                function clickEqual() {
+                    $('.ans').text(tot);
+                    num1 = tot;
+                    num2 = null;
+                    operator = null;
+                }
+
+            }
+
+        </script>
+    </body>
+
+</html>
